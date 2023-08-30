@@ -1,12 +1,15 @@
 package com.AulaJava.curso.Entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -23,12 +26,14 @@ private String name;
 private String email;
 private String phone;
 private String password;
-/*public User() {
+@OneToMany(mappedBy = "cliente")
+private List<Order> orders = new ArrayList<>();
+public User() {
 	
-}*/
-public User(long iD, String name, String email, String phone, String password) {
+}
+public User(long ID, String name, String email, String phone, String password) {
 	super();
-	ID = iD;
+	this.ID = ID;
 	this.name = name;
 	this.email = email;
 	this.phone = phone;
@@ -78,6 +83,9 @@ public boolean equals(Object obj) {
 		return false;
 	User other = (User) obj;
 	return ID == other.ID;
+}
+public List<Order> getOrders() {
+	return orders;
 }
 
 }
